@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Student Mark Predictor ML App</title>
+  
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+
+  <style>
+    /* Reset & base */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Roboto', sans-serif;
+      background: linear-gradient(135deg, #74ebd5 0%, #ACB6E5 100%);
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .container {
+      max-width: 500px;
+      width: 90%;
+      background: #ffffff;
+      padding: 40px;
+      border-radius: 16px;
+      box-shadow: 0 12px 25px rgba(0, 0, 0, 0.15);
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Banner */
+    .banner {
+      width: 100%;
+      border-radius: 12px;
+      margin-bottom: 25px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+      transition: transform 0.3s ease;
+    }
+
+    .banner:hover {
+      transform: scale(1.02);
+    }
+
+    h1 {
+      font-size: 26px;
+      color: #2c3e50;
+      margin-bottom: 25px;
+      font-weight: 700;
+    }
+
+    input[type="number"] {
+      width: 80%;
+      padding: 14px;
+      margin: 15px 0;
+      border: 1px solid #ccc;
+      border-radius: 12px;
+      font-size: 16px;
+      transition: all 0.3s ease;
+    }
+
+    input[type="number"]:focus {
+      outline: none;
+      border-color: #3498db;
+      box-shadow: 0 0 10px rgba(52, 152, 219, 0.3);
+    }
+
+    .button_css {
+      background: linear-gradient(90deg, #36D1DC 0%, #5B86E5 100%);
+      color: #fff;
+      padding: 15px 35px;
+      font-size: 16px;
+      font-weight: 600;
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      margin-top: 10px;
+    }
+
+    .button_css:hover {
+      transform: translateY(-3px) scale(1.05);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+    }
+
+    h2 {
+      color: #27ae60;
+      margin-top: 30px;
+      font-size: 22px;
+      font-weight: 500;
+      min-height: 28px;
+      transition: all 0.3s ease;
+    }
+
+    /* Floating effect */
+    .container::before {
+      content: '';
+      position: absolute;
+      width: 300px;
+      height: 300px;
+      background: rgba(52, 152, 219, 0.2);
+      border-radius: 50%;
+      top: -100px;
+      right: -100px;
+      z-index: -1;
+      animation: float 6s ease-in-out infinite;
+    }
+
+    .container::after {
+      content: '';
+      position: absolute;
+      width: 200px;
+      height: 200px;
+      background: rgba(46, 204, 113, 0.2);
+      border-radius: 50%;
+      bottom: -50px;
+      left: -50px;
+      z-index: -1;
+      animation: float2 8s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0) rotate(0deg); }
+      50% { transform: translateY(20px) rotate(45deg); }
+    }
+
+    @keyframes float2 {
+      0%, 100% { transform: translateY(0) rotate(0deg); }
+      50% { transform: translateY(-20px) rotate(-30deg); }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <!-- Banner -->
+    <img src="static/images/college_banner2.png" alt="College Banner" class="banner">
+
+    <!-- Form -->
+    <form action="{{ url_for('predict') }}" method="post">
+      <h1>Enter Your Study Hours to Predict Marks</h1>
+      <input type="number" name="study_hours" placeholder="Enter study hours" required />
+      <br>
+      <button type="submit" class="button_css">Predict Marks</button>
+    </form>
+
+    <!-- Prediction Output -->
+    <h2>{{ prediction_text }}</h2>
+  </div>
+</body>
+</html>
